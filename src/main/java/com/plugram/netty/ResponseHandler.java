@@ -16,7 +16,7 @@ public class ResponseHandler extends SimpleChannelUpstreamHandler {
 
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) throws Exception {
-		// リクエストを受け取るときは以下の行のコメントを外す
+		// リクエストを受け取るときは以下のコメントを外し、やりたい処理を書く
 		// HttpRequest request = (HttpRequest) e.getMessage();
 		
 		String message = "Hello Netty!!";
@@ -25,8 +25,8 @@ public class ResponseHandler extends SimpleChannelUpstreamHandler {
 		// HTTP HeaderのCONTENT-LENGTHを設定する
 		HttpHeaders.setContentLength(response, message.length());
 		
-		// チャンネルを取得しmessageを書き込む。
-		// Nettyは非同期で処理されるので
+		// チャンネルを取得しmessageを書き込む
+		// Nettyは非同期で処理されるので戻り値としてChannelFutureを受け取る
 		ChannelFuture future = e.getChannel().write(message);
 		
 		// 送信が終わればコネクションを閉じる
